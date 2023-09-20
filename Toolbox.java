@@ -1,8 +1,9 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Toolbox {
+public class Toolbox implements ItemIf {
     private String name;
     private double totalCost;
     private List<ToolIf> items;
@@ -92,6 +93,16 @@ public class Toolbox {
         } while (select < 1 || select > 2); // Repeat for an invalid selection
 
         return tool;
+    }
+
+    @Override
+    public double getCost() {
+        //iterate through the list of items and add up the cost
+        double totalCost = 0.0;
+        for (ToolIf item : items) {
+            totalCost += item.getCost();
+        }
+        return totalCost;
     }
 }
 

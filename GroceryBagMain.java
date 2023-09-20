@@ -52,7 +52,7 @@ class Orange implements GroceryIf {
     }
 }
 
-class GroceryBag {
+class GroceryBag implements ItemIf{
     private String name;
     private double totalCost;
     private List<GroceryIf> items;
@@ -81,6 +81,16 @@ class GroceryBag {
             item.display();
         }
         System.out.printf("The total cost of these items is $%.2f%n%n", totalCost);
+    }
+
+    @Override
+    public double getCost() {
+       //iterate through the list and add up the cost
+        double totalCost = 0;
+        for (GroceryIf item : items) {
+            totalCost += item.getCost();
+        }
+        return totalCost;
     }
 }
 
