@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//changes done is added interface for Toolbox and GroceryBag and made createTool public
 public class Toolbox implements ItemIf {
     private String name;
     private double totalCost;
@@ -35,7 +36,7 @@ public class Toolbox implements ItemIf {
         System.out.printf("The total cost of these items is $%.2f%n%n", totalCost);
     }
 
-    public static void main(String args) {
+    public static void main(String[] args) {
         Toolbox toolbox = new Toolbox("Data Processing Support");
         ToolIf[] tools = new ToolIf[2];
         Scanner scanner = new Scanner(System.in);
@@ -56,7 +57,7 @@ public class Toolbox implements ItemIf {
         }
     }
 
-    private static ToolIf createTool(Scanner scanner) {
+    public static ToolIf createTool(Scanner scanner) {
         ToolIf tool = null;
         int select;
         String name;
