@@ -16,7 +16,7 @@ public class ShoppingCart {
 
     //add item to cart
     public boolean addItem(ItemIf item) {
-        items.add(item);
+        items.add(item);   //add item to cart
         totalCostofCart += item.getCost();
         return true;
     }

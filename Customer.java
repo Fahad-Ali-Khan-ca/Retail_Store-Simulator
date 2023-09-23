@@ -5,7 +5,7 @@ public class Customer {
     private String name;
     private ShoppingCart cart;
     private double Cash;
-    private RetailStoreFactory factory;
+    private RetailStoreFactory factory;  //pointer to factory
 
     public Customer(String name) {
         this.name = name;
@@ -24,5 +24,7 @@ public class Customer {
     public double getCost() {
         return cart.getCost();
     }
+
+    public void 
 
 }
