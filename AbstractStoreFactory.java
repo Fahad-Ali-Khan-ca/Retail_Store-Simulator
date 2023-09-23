@@ -10,5 +10,7 @@ public abstract class AbstractStoreFactory {
     public abstract double calculateTotal();
     // calculate average amount a customer spends
     public abstract double calculateAverage();
+    //calculate percentage 
+    public abstract double calculatePercentage();
 
 }
