@@ -1,9 +1,10 @@
 // Purpose: Class for shopping cart
 // Created By: Fahad Ali Khan
-// Created On: 2020-10-25
+// Created On: 2020-09-19
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ShoppingCart {
     private List<ItemIf> items;
@@ -15,21 +16,50 @@ public class ShoppingCart {
     }
 
     //add item to cart
-    public boolean addItem(ItemIf item) {
-        items.add(item);   //add item to cart
-        totalCostofCart += item.getCost();
-        return true;
-    }
-    //remove item from cart
-    public boolean removeItem(ItemIf item) {
-        if (items.contains(item)) {
-            items.remove(item);
-            totalCostofCart -= item.getCost();
-            return true;
-        } else {
-            return false;
+    public boolean addItem() {
+        boolean retval = false;
+        ItemIf item = null;
+        int select;
+        Scanner scanner = new Scanner(System.in); // Create a Scanner object to read user input
+    
+        // Display options to the user
+        System.out.println("What would you like to add to your cart?");
+        System.out.println("1. Toolbox");
+        System.out.println("2. Grocery Bag");
+        System.out.print("Selection: ");
+        
+        select = scanner.nextInt(); // Read user's selection
+        scanner.nextLine(); // Consume the newline character
+        
+        switch (select) {
+            case 1: // User selected Toolbox
+                item = new Toolbox("Data Processing Support");
+                for (int i = 0; i < 2; i++) { // Assuming you want to add 2 tools to the toolbox
+                    ToolIf tool = Toolbox.createTool(scanner); // Call the createTool method to create a tool
+                    ((Toolbox) item).addTool(tool); // Add the created tool to the toolbox
+                }
+                break;
+            case 2: // User selected Grocery Bag
+                item = new GroceryBag("Grocery Bag");
+                for (int i = 0; i < 2; i++) { // Assuming you want to add 2 groceries to the grocery bag
+                    GroceryIf grocery = GroceryBagMain.createGrocery(scanner); // Call the createGrocery method to create a grocery
+                    ((GroceryBag) item).addGrocery(grocery); // Add the created grocery to the grocery bag
+                }
+                break;
+            default:
+                System.out.println("Invalid selection!");
+                return false; // Return false as the selection was invalid
         }
+        
+        if (item != null) {
+            items.add(item); // Add the created item to the items list
+            totalCostofCart += item.getCost(); // Update the total cost of the cart
+            retval = true;
+        }
+        
+        return retval;
     }
+    
  
     //show items in cart
     public void display() {
