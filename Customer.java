@@ -5,11 +5,15 @@ public class Customer {
     private String name;
     private ShoppingCart cart;
     private double Cash;
-    private RetailStoreFactory factory;  //pointer to factory
+    //referemce to retail store
+    private RetailStoreFactory store;
 
-    public Customer(String name) {
+
+    public Customer(String name, RetailStoreFactory store, double Cash) {
         this.name = name;
         this.cart = new ShoppingCart();
+        this.store = store;
+        this.Cash = Cash;
     }
 
     public boolean addItem(ItemIf item) {
@@ -25,6 +29,22 @@ public class Customer {
         return cart.getCost();
     }
 
-    public void 
-
+    //buy items in cart
+    public void buy() {
+        System.out.printf("Customer %s is buying the following items:%n", name);
+        cart.display();
+        double totalCost = cart.getCost();
+        //get total cost of items
+        System.out.printf("The total cost of these items is $%.2f%n%n", getCost());
+        //buy items
+        // if customer has enough cash buy items
+        if (Cash >= totalCost) {            
+            //update cash
+            Cash -= totalCost;
+            //clear cart
+            cart = new ShoppingCart();
+        } else {
+            System.out.printf("Customer %s does not have enough cash to buy these items%n%n", name);
+        }
+    }
 }

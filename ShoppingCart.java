@@ -20,6 +20,17 @@ public class ShoppingCart {
         totalCostofCart += item.getCost();
         return true;
     }
+    //remove item from cart
+    public boolean removeItem(ItemIf item) {
+        if (items.contains(item)) {
+            items.remove(item);
+            totalCostofCart -= item.getCost();
+            return true;
+        } else {
+            return false;
+        }
+    }
+ 
     //show items in cart
     public void display() {
         System.out.printf("Shopping cart has the following items:%n");
