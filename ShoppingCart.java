@@ -13,6 +13,7 @@ public class ShoppingCart {
         this.items = new ArrayList<>();
         this.totalCostofCart = 0.0;
     }
+
     //add item to cart
     public boolean addItem(ItemIf item) {
         items.add(item);
