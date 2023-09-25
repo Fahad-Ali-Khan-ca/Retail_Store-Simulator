@@ -20,7 +20,6 @@ public class ShoppingCart {
         ItemIf item = null;
         int select;
         Scanner scanner = new Scanner(System.in);
-        try {
             // Display options to the user
             System.out.println("What would you like to add to your cart?");
             System.out.println("1. Toolbox");
@@ -54,9 +53,7 @@ public class ShoppingCart {
             totalCostofCart += item.getCost(); // Update the total cost of the cart
             items.add(item); // Add the created item to the items list
             return true;
-        } finally {
-            scanner.close(); // Close the Scanner object in the finally block
-        }
+        
     }
  
     //show items in cart
