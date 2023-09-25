@@ -55,14 +55,14 @@ public class ShoppingCart {
             return true;
         
     }
+
+    //should be able to remove items from cart but not mentioned in the assignment
  
     //show items in cart
     public void display() {
-        System.out.printf("Shopping cart has the following items:%n");
         for (ItemIf item : items) {
             item.display();
         }
-        System.out.printf("The total cost of these items is $%.2f%n%n", totalCostofCart);
     }
     //get cost of cart
     public double getCost() {

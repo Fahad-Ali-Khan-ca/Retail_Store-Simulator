@@ -32,21 +32,30 @@ public class Customer {
         cart.display();
     }
 
+    //add cash to customer
+    public void addCash(double cash) {
+        Cash += cash;
+        //print statement 
+        System.out.printf("Customer %s has added $%.2f to their wallet%n%n", name, cash);
+    }
+
     public double getCost() {
         return (cart.getCost() + getGst());
     }
 
     //buy items in cart and tax to toolbox
     public boolean buy() {
-        System.out.printf("Customer %s is buying the following items in the shopping cart", name);
-        double totalCost = cart.getCost() ;
-        //get total cost of items
-        System.out.printf("The total cost of these items is $%.2f%n%n", getCost());
+        //customer displays
+        display();
+        double totalCost = getCost() ;
+        System.out.printf("The total GST on these items is $%.2f%n", getGst());
+        System.out.printf("The total cost of these items is $%.2f%n", totalCost);
         //buy items
         // if customer has enough cash buy items
         if (Cash >= totalCost) {
             //update cash
             Cash -= totalCost;
+            System.out.printf("Customer %s has bought the items in their cart%n%n", name);
             //clear cart
             cart = new ShoppingCart();
             return true;

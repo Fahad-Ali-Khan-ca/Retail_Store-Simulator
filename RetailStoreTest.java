@@ -1,10 +1,14 @@
 public class RetailStoreTest {
 
 //    Test Program
+// This could be changed be built like a kiosk where the user can select which store they want to go to 
+// and then the program will run for that store and display the results
     public static void main(String[] args) {
         // Create a new retail store  // can ask customer which store they want to go to
         AbstractStoreFactory store = new RetailStoreFactory("Walmart");
 
+
+        // Simulating for three customer for now
         // Create three customers
         Customer customer1 = new Customer("Alice", store,100.0);
         Customer customer2 = new Customer("Bob",store, 50.0);
@@ -14,37 +18,28 @@ public class RetailStoreTest {
         store.addCustomer(customer1);
         store.addCustomer(customer2);
         store.addCustomer(customer3);
-        //Have each user  add items to their cart untill they want to stop
+        //Have each user  add items to their cart atleast 2 times 
         for (Customer customer : store.getCustomers()) {
             String name = customer.getName();
-            System.out.printf("Customer %s is adding items to their cart:%n", name);
+            // customer wants to add items to their cart and buy them
+            System.out.printf("Customer %s wants to adds items to their cart and buys them%n%n", name);
             boolean retval=customer.addItem();
             if(retval==true)
-            {
-                System.out.printf("Customer %s has added the following items to their cart:%n", name);
-                customer.display();
-            }
-            else
-            {
-                System.out.printf("Customer %s has not added the following items to their cart because of lack of cash", name);
-            }
-        }
+            {   
+                retval=customer.buy();
         
-        // Have each customer buy items and display their order
-        for (Customer customer : store.getCustomers()) {
-            String name = customer.getName();
-            System.out.printf("Customer %s is buying the following items:%n", name);
-            boolean retval=customer.buy();
-            if(retval==true)
-            {
-                System.out.printf("Customer %s has bought the following items:%n", name);
-                customer.display();
+                
+            } else {
+                System.out.printf("System Error: Unable to add items to cart%n%n");
             }
-            else
-            {
-                System.out.printf("Customer %s has not bought the following items because of lack of cash", name);
-            }
+        
+            //store displays the 
         }
+        //add cash to customer
+        customer1.addCash(100.0);
+        customer2.addCash(50.0);
+        customer3.addCash(200.0);
+
 
         // Calculate and display statistics for the retail store
         store.calculatePercentage();
@@ -54,4 +49,5 @@ public class RetailStoreTest {
         System.out.printf("Percentage of revenue from groceries: %.2f%%%n",((RetailStoreFactory)store).getPercentageGrocery());
     }
 }
+
 
