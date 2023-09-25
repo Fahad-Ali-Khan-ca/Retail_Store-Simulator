@@ -1,0 +1,7 @@
+{
+    "java.test.config": {
+        "name" : "mytestConfigurations",
+        "vmArgs": ["-Xms512M"],
+        "env" : {"key": "value"}
+    }
+}

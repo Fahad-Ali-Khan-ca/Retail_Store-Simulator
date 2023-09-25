@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 interface GroceryIf {
-    double getCost();
 
+    double getCost();
     void display();
 }
 
@@ -73,7 +73,8 @@ class GroceryBag implements ItemIf{
             return false;
         }
     }
-
+    
+    @Override
     public void display() {
         System.out.println();
         System.out.println(name + " is a grocery bag with the following items:");

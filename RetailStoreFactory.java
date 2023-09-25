@@ -10,20 +10,29 @@ public class RetailStoreFactory extends AbstractStoreFactory {
     private List<Customer> customers;
     private double avgSpend;
     private double totalSpend;
-    private int  totalCustomers;
+    //store percentage of total revenue in tools and groceries
+    private double percentageToolbox;
+    private double percentageGrocery;
+
     
     public RetailStoreFactory(String storeName) {
         this.Storename = storeName;
         this.customers = new ArrayList<>();
+        avgSpend = 0.0;
+        totalSpend = 0.0;
+        percentageToolbox = 0.0;
+        percentageGrocery = 0.0;
     }
 
     @Override
     public void display() {
-        System.out.println("Retail Store: " + Storename);
-        System.out.println("Customers:");
+        System.out.printf("Store %s has the following customers:%n", Storename);
         for (Customer customer : customers) {
             customer.display();
         }
+        System.out.printf("The average spend of customers at store %s is $%.2f%n", Storename, calculateAverage());
+        System.out.printf("The total spend of customers at store %s is $%.2f%n", Storename, calculateTotal());
+        System.out.printf("The total number of customers at store %s is %d%n", Storename, customers.size());
     }
 
     @Override
@@ -32,6 +41,7 @@ public class RetailStoreFactory extends AbstractStoreFactory {
         for (Customer customer : customers) {
             totalRevenue += customer.getCost();
         }
+        totalSpend = totalRevenue;
         return totalRevenue;
     }
 
@@ -40,15 +50,44 @@ public class RetailStoreFactory extends AbstractStoreFactory {
         if (customers.isEmpty()) {
             return 0.0; // Avoid division by zero
         }
-
-        double totalRevenue = calculateTotal();
-        return totalRevenue / customers.size();
+        avgSpend = totalSpend / customers.size();
+        return avgSpend;
     }
 
     @Override
-    public double calculatePercentage() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'calculatePercentage'");
+    public void calculatePercentage() {
+        //calculate percentage of total revenue in tools and groceries
+        double totalRevenue = calculateTotal();
+        double totalToolboxRevenue = 0.0;
+        double totalGroceryRevenue = 0.0;
+        for (Customer customer : customers) {
+            totalToolboxRevenue += customer.getToolboxCost();
+            totalGroceryRevenue += customer.getGroceryCost();
+        }
+        double percentageToolbox = totalToolboxRevenue / totalRevenue * 100;
+        double percentageGrocery = totalGroceryRevenue / totalRevenue * 100;
+        System.out.printf("The percentage of revenue from tools is %.2f%%%n", percentageToolbox);
+        //store percentage of total revenue in tools and groceries
+        this.percentageGrocery = percentageGrocery;
+        this.percentageToolbox = percentageToolbox;
     }
 
+    @Override
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+    }
+    //getters
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    //get percentage of revenue from toolbox
+    public double getPercentageToolbox() {
+        return percentageToolbox;
+    }
+    //get percentage of revenue from groceries
+    public double getPercentageGrocery() {
+        return percentageGrocery;
+    }
+    
 }

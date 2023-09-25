@@ -26,7 +26,7 @@ public class Toolbox implements ItemIf {
         }
         return false;
     }
-
+    @Override
     public void display() {
         System.out.println();
         System.out.println(name + " is a toolbox with the following items:");
@@ -53,7 +53,7 @@ public class Toolbox implements ItemIf {
         toolbox.display();
 
         for (ToolIf tool : tools) {
-            tool = null;
+             tool = null;
         }
     }
 
