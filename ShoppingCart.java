@@ -78,4 +78,24 @@ public class ShoppingCart {
     public List<ItemIf> getItems() {
         return items;
     }
+    
+    public double getToolboxCost() {
+        double toolboxCost = 0.0;
+        for (ItemIf item : items) {
+            if (isToolbox(item)) {
+                toolboxCost += item.getCost();
+            }
+        }
+        return toolboxCost;
+    }
+
+    public double getGroceryCost() {
+        double groceryCost = 0.0;
+        for (ItemIf item : items) {
+            if (!isToolbox(item)) {
+                groceryCost += item.getCost();
+            }
+        }
+        return groceryCost;
+    }
 }

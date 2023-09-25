@@ -36,7 +36,7 @@ public class RetailStoreFactory extends AbstractStoreFactory {
     public double calculateTotal() {
         double totalRevenue = 0.0;
         for (Customer customer : customers) {
-            totalRevenue += customer.getCost();
+            totalRevenue += customer.getTotalSpend();
         }
         totalSpend = totalRevenue;
         return totalRevenue;
@@ -62,8 +62,7 @@ public class RetailStoreFactory extends AbstractStoreFactory {
         }
         double percentageToolbox = totalToolboxRevenue / calculateTotal() * 100;
         double percentageGrocery = totalGroceryRevenue / calculateTotal() * 100;
-        System.out.printf("The percentage of revenue from tools is %.2f%%%n", percentageToolbox);
-        //store percentage of total revenue in tools and groceries
+       //store percentage of total revenue in tools and groceries
         this.percentageGrocery = percentageGrocery;
         this.percentageToolbox = percentageToolbox;
     }

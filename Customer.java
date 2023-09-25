@@ -2,6 +2,7 @@
 // Created By: Fahad Ali Khan
 // Created On: 2023-09-19
 
+import java.util.List;
 
 public class Customer {
     private String name;
@@ -12,12 +13,16 @@ public class Customer {
     //cost for toolbox items and groceries
     private double toolboxCost;
     private double groceryCost;
+    private double totalSpend;
 
     public Customer(String name, AbstractStoreFactory store, double Cash) {
         this.name = name;
         this.cart = new ShoppingCart();
         this.store = store;
         this.Cash = Cash;
+        this.toolboxCost = 0.0;
+        this.groceryCost = 0.0;
+        this.totalSpend = 0.0;
     }
 
     public  boolean addItem() {
@@ -49,16 +54,19 @@ public class Customer {
         display();
         double totalCost = getCost() ;
         System.out.printf("The total GST on these items is $%.2f%n", getGst());
-        System.out.printf("The total cost of these items is $%.2f%n", totalCost);
+        System.out.printf("The total cost + GST of these items is $%.2f%n", totalCost);
         //buy items
         // if customer has enough cash buy items
         if (Cash >= totalCost) {
             //update cash
+            totalSpend += totalCost;
             Cash -= totalCost;
+            toolboxCost=cart.getToolboxCost();
+            groceryCost=cart.getGroceryCost();
             System.out.printf("Customer %s has bought the items in their cart%n%n", name);
             //clear cart
             cart = new ShoppingCart();
-            return true;
+           return true;
         } else {
             System.out.printf("Customer %s does not have enough cash to buy these items%n%n", name);
             return false;
@@ -72,7 +80,6 @@ public class Customer {
         for (ItemIf item : cart.getItems()) {
             cost= item.getCost();
             if (item instanceof Toolbox) {
-                toolboxCost += cost;
                 tax += cost * 0.14;
             } else if (item instanceof GroceryBag) {
                 groceryCost += cost;
@@ -82,6 +89,7 @@ public class Customer {
     }
 
 	public double getToolboxCost() {
+
 		return toolboxCost;
 	}
 
@@ -92,4 +100,10 @@ public class Customer {
     public String getName() {
         return name;
     }
+    //get totalspend 
+    public double getTotalSpend() {
+        return totalSpend;
+    }
+  
+
 }

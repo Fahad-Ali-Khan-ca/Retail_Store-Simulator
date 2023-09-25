@@ -18,12 +18,13 @@ public class RetailStoreTest {
         store.addCustomer(customer1);
         store.addCustomer(customer2);
         store.addCustomer(customer3);
-        //Have each user  add items to their cart atleast 2 times 
+        //Have each user  add items to their cart SIMULATING INPUT FOR TESTING
         for (Customer customer : store.getCustomers()) {
             String name = customer.getName();
             // customer wants to add items to their cart and buy them
             System.out.printf("Customer %s wants to adds items to their cart and buys them%n%n", name);
             boolean retval=customer.addItem();
+            System.out.printf("%n%n");
             if(retval==true)
             {   
                 retval=customer.buy();
@@ -43,7 +44,7 @@ public class RetailStoreTest {
 
         // Calculate and display statistics for the retail store
         store.calculatePercentage();
-
+        System.out.printf("Total revenue: $%.2f%n",((RetailStoreFactory)store).calculateTotal());
         System.out.printf("Average customer spend: $%.2f%n",((RetailStoreFactory)store).calculateAverage());
         System.out.printf("Percentage of revenue from tools: %.2f%%%n", ((RetailStoreFactory)store).getPercentageToolbox());
         System.out.printf("Percentage of revenue from groceries: %.2f%%%n",((RetailStoreFactory)store).getPercentageGrocery());
