@@ -61,7 +61,7 @@ public class Customer {
             //update cash
             totalSpend += totalCost;
             Cash -= totalCost;
-            toolboxCost=cart.getToolboxCost();
+            toolboxCost= (cart.getToolboxCost()+getGst());  // because shopping cart doesn't calculate gst
             groceryCost=cart.getGroceryCost();
             System.out.printf("Customer %s has bought the items in their cart%n%n", name);
             //clear cart
@@ -105,5 +105,4 @@ public class Customer {
         return totalSpend;
     }
   
-
 }
